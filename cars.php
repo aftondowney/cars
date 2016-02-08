@@ -1,9 +1,9 @@
 <?php
 class Car
 {
-    public $make_model;
+    private $make_model;
     private $price;
-    public $miles;
+    private $miles;
 
     function __construct($car_model, $cost, $mileage)
     {
@@ -26,6 +26,26 @@ class Car
     {
         return $this->price;
     }
+
+    function setModel($new_model)
+    {
+        $this->make_model = $new_model;
+    }
+
+    function getModel()
+    {
+        return $this->make_model;
+    }
+
+    function setMiles($new_miles)
+    {
+        $this->miles = $new_miles;
+    }
+
+    function getMiles()
+    {
+        return $this->miles;
+    }
 }
 
 $jeep = new Car("2013 Jeep Grand Cherokee", 15675, 25000);
@@ -44,7 +64,7 @@ foreach ($cars as $car) {
     if ($car_price < $_GET["price"]) {
         array_push($cars_matching_search, $car);
     }
-}
+}2003
 ?>
 
 <!DOCTYPE html>
@@ -58,10 +78,12 @@ foreach ($cars as $car) {
         <?php
             foreach ($cars_matching_search as $car) {
               $current_price = $car->getPrice();
-                echo "<li> $car->make_model </li>";
+              $current_model = $car->getModel();
+              $current_miles = $car->getMiles();
+                echo "<li> $current_model </li>";
                 echo "<ul>";
                     echo "<li> $$current_price </li>";
-                    echo "<li> Miles: $car->miles </li>";
+                    echo "<li> Miles: $current_miles </li>";
                 echo "</ul>";
             }
         ?>
