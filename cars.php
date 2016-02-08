@@ -73,7 +73,8 @@ $cars = array($jeep, $toyota, $aston, $tesla);
 $cars_matching_search = array();
 foreach ($cars as $car) {
   $car_price = $car->getPrice();
-    if ($car_price < $_GET["price"]) {
+  $car_mileage = $car->getMiles();
+    if ($car_price < $_GET["price"] && $car_mileage < $_GET["miles"]) {
         array_push($cars_matching_search, $car);
     }
 }
@@ -94,11 +95,14 @@ foreach ($cars as $car) {
               $current_miles = $car->getMiles();
               $current_image = $car->getImage();
                 echo "<li> $current_model </li>";
-                echo "<img src=$current_image>";
+                echo "<img width='400' src=$current_image>";
                 echo "<ul>";
                     echo "<li> $$current_price </li>";
                     echo "<li> Miles: $current_miles </li>";
                 echo "</ul>";
+            }
+            if (empty($cars_matching_search)) {
+              echo "Sorry there is no match! Please enter price and mileage maximums.";
             }
         ?>
     </ul>
