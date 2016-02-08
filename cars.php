@@ -4,12 +4,14 @@ class Car
     private $make_model;
     private $price;
     private $miles;
+    private $image;
 
-    function __construct($car_model, $cost, $mileage)
+    function __construct($car_model, $cost, $mileage, $image_path)
     {
       $this->make_model = $car_model;
       $this->price = $cost;
       $this->miles = $mileage;
+      $this->image = $image_path;
     }
 
     function worthBuying($max_price)
@@ -46,15 +48,25 @@ class Car
     {
         return $this->miles;
     }
+
+    function setImage($new_image)
+    {
+        $this->image = $new_image;
+    }
+
+    function getImage()
+    {
+        return $this->image;
+    }
 }
 
-$jeep = new Car("2013 Jeep Grand Cherokee", 15675, 25000);
+$jeep = new Car("2013 Jeep Grand Cherokee", 15675, 25000, "images/jeep.jpg");
 
-$toyota = new Car("2003 Toyota Avalon", 4356, 188888);
+$toyota = new Car("2003 Toyota Avalon", 4356, 188888, "images/toyota.jpg");
 
-$aston = new Car("2015 Aston Martin Vanquish", 114987, 2035);
+$aston = new Car("2015 Aston Martin Vanquish", 114987, 2035, "images/aston.jpg");
 
-$tesla = new Car("2016 Tesla Model X", 120000, 15);
+$tesla = new Car("2016 Tesla Model X", 120000, 15, "images/tesla.jpg");
 
 $cars = array($jeep, $toyota, $aston, $tesla);
 
@@ -64,7 +76,7 @@ foreach ($cars as $car) {
     if ($car_price < $_GET["price"]) {
         array_push($cars_matching_search, $car);
     }
-}2003
+}
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +92,9 @@ foreach ($cars as $car) {
               $current_price = $car->getPrice();
               $current_model = $car->getModel();
               $current_miles = $car->getMiles();
+              $current_image = $car->getImage();
                 echo "<li> $current_model </li>";
+                echo "<img src=$current_image>";
                 echo "<ul>";
                     echo "<li> $$current_price </li>";
                     echo "<li> Miles: $current_miles </li>";
