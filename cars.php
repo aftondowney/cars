@@ -4,6 +4,11 @@ class Car
     public $make_model;
     public $price;
     public $miles;
+
+    function worthBuying($max_price)
+    {
+        return $this->price < ($max_price);
+    }
 }
 
 $jeep = new Car();
@@ -36,4 +41,26 @@ foreach ($cars as $car) {
 }
 
 
+
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Car Dealership's Homepage</title>
+</head>
+<body>
+    <h1>Your Car Dealership</h1>
+    <ul>
+        <?php
+            foreach ($cars_matching_search as $car) {
+                echo "<li> $car->make_model </li>";
+                echo "<ul>";
+                    echo "<li> $$car->price </li>";
+                    echo "<li> Miles: $car->miles </li>";
+                echo "</ul>";
+            }
+        ?>
+    </ul>
+</body>
+</html>
