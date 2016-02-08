@@ -2,46 +2,49 @@
 class Car
 {
     public $make_model;
-    public $price;
+    private $price;
     public $miles;
+
+    function __construct($car_model, $cost, $mileage)
+    {
+      $this->make_model = $car_model;
+      $this->price = $cost;
+      $this->miles = $mileage;
+    }
 
     function worthBuying($max_price)
     {
         return $this->price < ($max_price);
     }
+
+    function setPrice($new_price)
+    {
+        $this->price = $new_price;
+    }
+
+    function getPrice()
+    {
+        return $this->price;
+    }
 }
 
-$jeep = new Car();
-$jeep->make_model = "2013 Jeep Grand Cherokee";
-$jeep->price = 15675;
-$jeep->miles = 25000;
+$jeep = new Car("2013 Jeep Grand Cherokee", 15675, 25000);
 
-$toyota = new Car();
-$toyota->make_model = "2003 Toyota Avalon";
-$toyota->price = 4356;
-$toyota->miles = 188888;
+$toyota = new Car("2003 Toyota Avalon", 4356, 188888);
 
-$aston = new Car();
-$aston->make_model = "2015 Aston Martin Vanquish";
-$aston->price = 114987;
-$aston->miles = 2035;
+$aston = new Car("2015 Aston Martin Vanquish", 114987, 2035);
 
-$tesla = new Car();
-$tesla->make_model = "2016 Tesla Model X";
-$tesla->price = 120000;
-$tesla->miles = 15;
+$tesla = new Car("2016 Tesla Model X", 120000, 15);
 
 $cars = array($jeep, $toyota, $aston, $tesla);
 
 $cars_matching_search = array();
 foreach ($cars as $car) {
-    if ($car->price < $_GET["price"]) {
+  $car_price = $car->getPrice();
+    if ($car_price < $_GET["price"]) {
         array_push($cars_matching_search, $car);
     }
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -54,9 +57,10 @@ foreach ($cars as $car) {
     <ul>
         <?php
             foreach ($cars_matching_search as $car) {
+              $current_price = $car->getPrice();
                 echo "<li> $car->make_model </li>";
                 echo "<ul>";
-                    echo "<li> $$car->price </li>";
+                    echo "<li> $$current_price </li>";
                     echo "<li> Miles: $car->miles </li>";
                 echo "</ul>";
             }
